@@ -25,19 +25,19 @@ class Vector3:
         else:
             raise Exception()
 
-    def distanceTo(self, target) -> float:
+    def distance_to(self, target) -> float:
         dx = target.x - self.x
         dy = target.y - self.y
         dz = target.z - self.z
         return math.sqrt(dx * dx + dy * dy + dz * dz)
 
-    def distanceSquaredTo(self, target) -> float:
+    def distance_squared_to(self, target) -> float:
         dx = target.x - self.x
         dy = target.y - self.y
         dz = target.z - self.z
         return dx * dx + dy * dy + dz * dz
 
-    def xzDistanceTo(self, target) -> float:
+    def xz_distance_to(self, target) -> float:
         dx = target.x - self.x
         dz = target.z - self.z
         return math.sqrt(dx * dx + dz * dz)

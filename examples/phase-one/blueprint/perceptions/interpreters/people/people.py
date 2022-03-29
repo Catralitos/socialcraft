@@ -22,7 +22,7 @@ class PeopleCloseBy(PeopleInterpreter):
     def interpret(self, bot, players: List[Player]) -> List[Perception]:
         position = Vector3(bot.entity.position)
         for player in players:
-            if player.position.distanceSquaredTo(position) < self.__distance_squared:
+            if player.position.distance_squared_to(position) < self.__distance_squared:
                 return [Perception(self.__perception_label, 1, None)]
         return []
 

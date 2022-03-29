@@ -36,7 +36,7 @@ class ChopWood(Practice):
     def update(self):
         super().update()
         position = Vector3(self._bot.entity.position)
-        if position.distanceSquaredTo(self.__target_wood_block.position) < 16:
+        if position.distance_squared_to(self.__target_wood_block.position) < 16:
             block = self._bot.blockAt(self.__target_wood_block.position.toVec3())
             self._bot.dig(block)
 
