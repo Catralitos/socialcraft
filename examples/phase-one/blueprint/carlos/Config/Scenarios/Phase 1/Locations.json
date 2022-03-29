@@ -1,0 +1,16 @@
+{
+  "houses": [
+    {
+      "name": "House1",
+      "bounding_box": ["", ""],
+      "bed": ""
+    }
+  ],
+  "locations": [
+    {
+      "name": "Forest",
+      "bounding_box": ["", ""]
+    }
+  ]
+
+}

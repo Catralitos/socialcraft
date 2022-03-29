@@ -1,0 +1,76 @@
+{
+  "agents": [
+    {
+      "name": "Carlos",
+      "job": "Lumberjack",
+      "knowledge_base": [
+        {"energy": 1000},
+        {"energy_threshold": 400},
+        {"hunger":  200},
+        {"hunger_threshold": 500}
+      ],
+      "personality_traits": [
+        {"Agreeableness": 1.0}
+      ],
+      "relationships": [
+
+      ],
+      "friendships": [
+        {"Rui": 3},
+        {"Diogo": 4}
+      ],
+      "loves": [
+        {"Rui": 0},
+        {"Diogo": 0}
+      ]
+    },
+    {
+      "name": "Rui",
+      "job": "Lumberjack",
+      "knowledge_base": [
+        {"energy": 1000},
+        {"energy_threshold": 400},
+        {"hunger":  200},
+        {"hunger_threshold": 500}
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.75}
+      ],
+      "relationships": [
+
+      ],
+      "friendships": [
+        {"Carlos": 2},
+        {"Diogo": 3}
+      ],
+      "loves": [
+        {"Carlos": 0},
+        {"Diogo": 1}
+      ]
+    },
+    {
+      "name": "Diogo",
+      "job": "Lumberjack",
+      "knowledge_base": [
+        {"energy": 1000},
+        {"energy_threshold": 400},
+        {"hunger":  200},
+        {"hunger_threshold": 500}
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.5}
+      ],
+      "relationships": [
+
+      ],
+      "friendships": [
+        {"Rui": 5},
+        {"Carlos": 3}
+      ],
+      "loves": [
+        {"Rui": 1},
+        {"Carlos": 0}
+      ]
+    }
+  ]
+}
