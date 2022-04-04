@@ -1,5 +1,5 @@
 import math
-from carlos import Context
+from logic import Context
 from abc import ABC, abstractmethod
 from datetime import datetime
 
@@ -7,15 +7,14 @@ from datetime import datetime
 class Practice(ABC):
 
     def __init__(self, bot, name: str, timeout: float = 20) -> None:
-        self.__salience = 0
         self.__name = name
         self._bot = bot
         self.__start_time = None
         self.__timeout = timeout
 
-    @property
-    def salience(self) -> float:
-        return self.__salience
+    @abstractmethod
+    def salience(self, context) -> float:
+        pass
 
     @property
     def name(self) -> str:
@@ -23,10 +22,6 @@ class Practice(ABC):
 
     @abstractmethod
     def is_possible(self) -> bool:
-        pass
-
-    @abstractmethod
-    def update_salience(self, context: Context) -> float:
         pass
 
     @abstractmethod
@@ -51,4 +46,4 @@ class Practice(ABC):
         pass
 
     def __str__(self) -> str:
-        return f"{self.__name} [{self.__salience}]"
+        return f"{self.__name} [{self.salience()}]"

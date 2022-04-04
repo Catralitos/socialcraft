@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-from carlos.practice import Practice
+from logic.practice import Practice
 
 
 class SocialPractice(Practice, ABC):

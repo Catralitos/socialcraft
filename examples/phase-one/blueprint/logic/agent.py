@@ -1,10 +1,16 @@
-from carlos.Practice import Practice
-from carlos.Database import Database
+from logic import Practice, Database
+from javascript import require
+# from pathfinder import Movements
+
+pathfinder = require("mineflayer-pathfinder")
+mineflayer = require("mineflayer")
+movements = pathfinder.Movements
+block = require("mineflayer-block")
 
 
 class Agent:
 
-    def __init__(self, agent_data):
+    def __init__(self, agent_data, bot):
         self.name = agent_data.name
         self.job = agent_data.job
         self.knowledge_base = agent_data.knowledge_base
@@ -14,6 +20,7 @@ class Agent:
         self.loves = agent_data.loves
         self.current_identities = []
         self.current_practice = None
+        self.bot = bot
 
     def most_salient_identity(self):
         highest_salience = 0
@@ -36,3 +43,18 @@ class Agent:
                 highest_salience = current_salience
                 most_salient_practice = practice
         return most_salient_practice
+    
+    def locate_block(self, matching_blocks: []):
+        mcdata = self.bot.version
+        movements_aux = movements(self.bot, mcdata)
+        block = None
+        movements_aux.canDig = False
+        self.bot.pathfinder.setMovement(movements)
+        
+        if matching_blocks is not None and matching_blocks.len > 0:
+            blocks = self.bot.findBlocks(matching_blocks, 200, 100)
+            block = blocks[0]
+
+        return block
+
+

@@ -1,4 +1,4 @@
-from carlos.identity import Identity
+from logic.identity import Identity
 
 
 class Boss(Identity):

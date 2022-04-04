@@ -10,7 +10,7 @@ class Relationships(Enum):
 class Database:
 
     def __init__(self):
-        config_folder = 'Config'
+        config_folder = 'config'
         identities = []
         practices = []
         agents = []

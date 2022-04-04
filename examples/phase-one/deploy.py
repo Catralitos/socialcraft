@@ -1,3 +1,5 @@
+import json
+from collections import ChainMap
 from socialcraft import AgentManager
 import pathlib
 import os
@@ -26,6 +28,32 @@ if __name__ == "__main__":
         print(f"  RIP {old_agent.name}!")
     print("Killed all dangling agents!")
 
-    # read beds from JSON
-    # read workplaces from JSON
+    print("Deploying agents...")
+    f = open(
+        'C:\\Users\\catra\\Documents\\RepositoriosGit\\socialcraft\\examples\\phase-one\\blueprint\\logic\\config\\Scenarios\\Phase 1\\Agents.json')
+    data = json.load(f)
+
+    # read beds from JSON (ignoring for now, cause I have no world)
+    # read workplaces from JSON (ignoring for now, cause I have no world)
     # read agents from JSON
+
+    agent_list = []
+
+    for agent in data["agents"]:
+        kb = dict(ChainMap(*agent["knowledge_base"]))
+        pt = dict(ChainMap(*agent["personality_traits"]))
+        r = dict(ChainMap(*agent["relationships"]))
+        f = dict(ChainMap(*agent["friendships"]))
+        lo = dict(ChainMap(*agent["loves"]))
+        aux = manager.create_agent(agent["name"], blueprint=agent_blueprint, custom_envs={
+            "job": agent["job"],
+            "knowledge_base": kb,
+            "personality_traits": pt,
+            "relationships": r,
+            "friendships": f,
+            "loves": lo
+        })
+        aux.deploy()
+        agent_list.append(aux)
+
+    print("Agents deployed!")

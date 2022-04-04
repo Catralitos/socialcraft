@@ -60,7 +60,7 @@ class Vector3:
             return Vector3(0, 0, 0)
         return Vector3(self.x / absolute, self.y / absolute, self.z / absolute)
 
-    def toVec3(self) -> Vec3:
+    def to_vec3(self) -> Vec3:
         return Vec3(self.x, self.y, self.z)
 
     def __eq__(self, __o: object) -> bool:

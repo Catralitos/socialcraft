@@ -7,7 +7,8 @@
         {"energy": 1000},
         {"energy_threshold": 400},
         {"hunger":  200},
-        {"hunger_threshold": 500}
+        {"hunger_threshold": 500},
+        {"wood_stock" :  0}
       ],
       "personality_traits": [
         {"Agreeableness": 1.0}
@@ -31,7 +32,8 @@
         {"energy": 1000},
         {"energy_threshold": 400},
         {"hunger":  200},
-        {"hunger_threshold": 500}
+        {"hunger_threshold": 500},
+        {"wood_stock" :  0}
       ],
       "personality_traits": [
         {"Agreeableness": 0.75}
@@ -55,7 +57,8 @@
         {"energy": 1000},
         {"energy_threshold": 400},
         {"hunger":  200},
-        {"hunger_threshold": 500}
+        {"hunger_threshold": 500},
+        {"wood_stock" :  0}
       ],
       "personality_traits": [
         {"Agreeableness": 0.5}
