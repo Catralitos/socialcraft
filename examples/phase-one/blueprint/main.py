@@ -71,7 +71,7 @@ def async_basic_agent_loop(task):
         # update ongoing practice
 
         random.shuffle(practices)
-        practices.sort(reverse=True, key=lambda practice: practice.salience(context))
+        practices.sort(reverse=True, key=lambda practice, my_context = context: practice.salience(my_context))
 
         for practice in practices:
             logger.debug("{:<30} {:<5}".format(practice.name, practice.salience(context)))
@@ -86,7 +86,7 @@ def async_basic_agent_loop(task):
                 logger.info(f"🔃 Update Practice {ongoing_practice}")
                 ongoing_practice.update()
         else:
-            if practices[0].salience > 0:
+            if practices[0].salience(context) > 0:
                 ongoing_practice = practices[0]
                 logger.info(f"🚀 Start Practice {ongoing_practice}")
                 ongoing_practice.setup(context)

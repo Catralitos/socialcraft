@@ -14,8 +14,7 @@ class Socialize(SocialPractice):
     def __init__(self, bot) -> None:
         super().__init__(bot, "Socialize")
 
-    @staticmethod
-    def salience(agent, context):
+    def salience(self, context):
         if context.num_people > 1:
             return 0.7
         return 0

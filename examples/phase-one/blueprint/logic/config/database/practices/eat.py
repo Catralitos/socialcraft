@@ -1,4 +1,4 @@
-from random import random
+import random
 from perceptions import Block
 from logic.practice import Practice
 from logic.context import Context
@@ -15,7 +15,8 @@ class Eat(Practice):
         super().__init__(bot, "Eat")
 
     def salience(self, context):
-        return max(0, self._bot["knowledge_base"]["hunger"] - self._bot["knowledge_base"]["hunger_threshold"] / self._bot["knowledge_base"]["hunger"])
+        # return max(0, self._bot["knowledge_base"]["hunger"] - self._bot["knowledge_base"]["hunger_threshold"] / self._bot["knowledge_base"]["hunger"])
+        return random.randint(0, 1)
 
     def setup(self, context: Context) -> None:
         super().setup(context)

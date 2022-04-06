@@ -46,4 +46,4 @@ class Practice(ABC):
         pass
 
     def __str__(self) -> str:
-        return f"{self.__name} [{self.salience()}]"
+        return f"{self.__name}"
