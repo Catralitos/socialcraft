@@ -1,0 +1,58 @@
+{
+  "agents": [
+    {
+      "name": "Agent1",
+      "jobs": [
+        {"Lumberjack": 1},
+        {"Miner":  0}
+      ],
+      "knowledge_base": [
+        {"energy": 1000},
+        {"energy_threshold": 400},
+        {"hunger":  200},
+        {"hunger_threshold": 500},
+        {"wood_stock" :  0}
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.75}
+      ],
+      "relationships": [
+
+      ],
+      "friendships": [
+        {"Agent2": 5}
+      ],
+      "loves": [
+        {"Agent2": 5}
+      ],
+      "bed": "Bed1"
+    },
+    {
+      "name": "Agent2",
+      "jobs": [
+        {"Lumberjack": 0},
+        {"Miner":  1}
+      ],
+      "knowledge_base": [
+        {"energy": 1000},
+        {"energy_threshold": 400},
+        {"hunger":  200},
+        {"hunger_threshold": 500},
+        {"rock_stock" :  0}
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.25}
+      ],
+      "relationships": [
+
+      ],
+      "friendships": [
+        {"Agent1": 10}
+      ],
+      "loves": [
+        {"Agent1": 10}
+      ],
+      "bed": "Bed2"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
-FROM python_blueprint
+FROM javascript_blueprint
 
 WORKDIR /agent
 COPY . ./
 
 EXPOSE 3000
-CMD ["python", "-u", "main.py"]
+CMD ["node", "main.js"]

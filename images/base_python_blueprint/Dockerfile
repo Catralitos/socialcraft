@@ -3,7 +3,7 @@ LABEL socialcraft_agent=''
 
 # Add Mineflayer modules
 WORKDIR /agent
-RUN npm install -g mineflayer mineflayer-pathfinder mineflayer-statemachine minecraft-data vec3
+RUN npm install -g mineflayer mineflayer-pathfinder mineflayer-statemachine minecraft-data vec3 winston js-logger
 
 # Add javascript module to python
 RUN pip install javascript pika

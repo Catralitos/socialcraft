@@ -1,0 +1,82 @@
+{
+  "houses": [
+    {
+      "name": "House1",
+      "bounding_box": {
+        "vertex1": [
+          -5,
+          0,
+          -5
+        ],
+        "vertex2": [
+          5,
+          0,
+          5
+        ],
+        "height": 50
+      },
+      "beds": [
+        {
+          "name": "Bed1",
+          "position": [
+            0,
+            4,
+            -2
+          ]
+        },
+        {
+          "name": "Bed2",
+          "position": [
+            0,
+            4,
+            0
+          ]
+        },
+        {
+          "name": "Bed3",
+          "position": [
+            0,
+            4,
+            2
+          ]
+        }
+      ]
+    }
+  ],
+  "social_places": [
+    {
+      "name": "World",
+      "bounding_box": {
+        "vertex1": [
+          -25,
+          0,
+          -25
+        ],
+        "vertex2": [
+          25,
+          0,
+          25
+        ],
+        "height": 50
+      },
+      "social_appropriateness": 1
+    },
+    {
+      "name": "Plaza",
+      "bounding_box": {
+        "vertex1": [
+          -15,
+          0,
+          -15
+        ],
+        "vertex2": [
+          15,
+          0,
+          15
+        ],
+        "height": 50
+      },
+      "social_appropriateness": 1.2
+    }
+  ]
+}

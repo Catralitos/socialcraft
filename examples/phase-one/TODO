@@ -1,0 +1,56 @@
+3# Criar classe Context
+   3d. Ver numero de amigos na localização
+   3e. Se estiver a trabalhar, ver se tem patrões, ou empregados
+
+4# Criar classe Identity
+   4a. Analizar contexto para saliência
+   4b. Por a multiplicar para práticas
+
+5# Construir mapas para os cenários
+   5a. Desenhar mapas 100x100 no aseprite
+       5a1. Ter uma casa para cada bot
+       5a2. Ter um local de trabalho para cada bot
+       5a3. Ter um local de socialização
+   5b. Construir de acordo com o desenhado e fazer o JSON
+
+6# Criar os trabalhos
+   6a. Lenhador
+       Parte árvore inteira e apanha madeira. Na ultima hora do trabalho leva-a toda para o carpinteiro
+       Se apanha um sapling, ele planta o sapling.
+       Se não tiver ferramenta, vai buscar ao baú
+   6b. Agricultor
+       Cresce cenouras, trigo, batatas, beterrabes. O que tiver basicamente. Quando estiver crescido mete no bau
+       Se não tiver sementes vai procurar
+   6c. Caçador
+       Caça animais e lava a carne para o bau
+       Se não tiver ferramenta, vai buscar ao baú
+   6d. Pastor
+       Arranja items para fazer breeding do bau. Faz breeding. Mata animais para carne que mete no bau.
+       Verifica se há pelo menos dois animais do mesmo tipo e alimanta-os até entrarem em love mode
+       Se não houverem dois animais do mesmo tipo, vai buscar ao campo animais.
+   6e. Cozinheiro
+       Cozinha carne que recebe e mete no bau
+   6d. Carpinteiro
+       Transforma a madeira que recebe em ferramentas e mete no bau.
+
+7# Criar praticas gerais
+   7a. Ir buscar comida se não tiver
+   7b. Comer comida
+   7c. Ir para casa e dormir.
+
+8# Criar praticas sociais
+   7e. Elogiar agente
+   7f. Insultar agente
+   7g. Conversa fiada (escolher uma frase ao calhas)
+   7h. Evitar pessoas
+
+9# Criar indentidades
+   9a. Ser amigo
+   9b. Ser inimigo
+   9c. Ser co-trabalhador
+   9d. Estar contente
+   9e. Estar rabugento
+
+
+
+
