@@ -100,7 +100,7 @@ class SocialcraftHandler {
         if (string == null || string === "") {
             return;
         }
-        return string.includes(':') ? JSON.parse(string.replace(/'/g, "\"")) : string
+        return string.includes(':') || string.includes('{') || string.includes('}') ? JSON.parse(string.replace(/'/g, "\"")) : string
     }
 
     isJson(str) {

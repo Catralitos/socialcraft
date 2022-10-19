@@ -1,4 +1,5 @@
 const SocialPractice = require("../../../socialPractice.js")
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 class Greet extends SocialPractice {
 
@@ -8,9 +9,6 @@ class Greet extends SocialPractice {
             if (message === 'Hello, ' + this._bot.username) {
                 if (this.accepts(username) && !this._agent._socializing) {
                     this._agent._socializing = true;
-                    if (!this._chatted) {
-                        this._mustReply = true
-                    }
 
                     function getBotByUsername(username, bot) {
                         let players = Object.values(bot.players);
@@ -24,15 +22,29 @@ class Greet extends SocialPractice {
                     }
 
                     this._currentTarget = getBotByUsername(username, this._bot)
-                } else {
-                    this._done = true
+
+                    //if I haven't said hello, I must reply
+                    if (!this._chatted) {
+                        this._mustReply = true
+                    }
+                    //if I have said hello, then I got a reply, and I'm done
+                    else {
+                        this._done = true
+                    }
                 }
             }
         })
     }
 
     accepts(username) {
-        return this._agent._personality_traits["Agreeableness"] * this._agent._friendships[username] > 0
+        let accepted = (this._agent._personality_traits["Agreeableness"] * this._agent._friendships[username]) > 2
+        if (accepted) {
+            this._agent._friendships[username] = clamp(this._agent._friendships[username] + 0.2, 0, 10)
+        } else {
+            this._agent._friendships[username] = clamp(this._agent._friendships[username] - 0.2, 0, 10)
+            this._done = true
+        }
+        return accepted
     }
 
     getSalience(context) {
@@ -66,17 +78,15 @@ class Greet extends SocialPractice {
         super.update()
         if (this._nearTarget) {
             if (!this._chatted) {
+                //if I'm replying, after throwing the message, I am done
+                if (this._mustReply) {
+                    this._done = true
+                }
                 this._bot.chat("Hello, " + this._agent._socialPartner.username)
                 this._chatted = true
-            }
-            if (this._agent._socializing) {
-                this._done = true
+
             }
         }
-    }
-
-    hasEnded() {
-        return super.hasEnded() || this._done;
     }
 
 }

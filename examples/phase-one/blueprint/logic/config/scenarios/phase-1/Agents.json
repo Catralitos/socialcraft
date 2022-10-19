@@ -1,90 +1,300 @@
 {
   "agents": [
     {
-      "name": "Agent1",
+      "name": "Alex",
       "jobs": [
         {"Lumberjack": 1},
-        {"Miner":  0}
+        {"Miner":  0},
+        {"Patrolman":  0},
+        {"Gatherer":  0},
+        {"Fisherman":  0},
+        {"Farmer":  0}
       ],
       "knowledge_base": [
-        {"energy": 1000},
-        {"energy_threshold": 400},
-        {"hunger":  200},
-        {"hunger_threshold": 500},
-        {"wood_stock" :  0}
-      ],
-      "personality_traits": [
-        {"Agreeableness": 0.75}
-      ],
-      "relationships": [
-
-      ],
-      "friendships": [
-        {"Agent2": 0},
-        {"Agent3": 5}
-      ],
-      "loves": [
-        {"Agent2": 0},
-        {"Agent3": 0}
-      ],
-      "bed": "Bed1"
-    },
-    {
-      "name": "Agent2",
-      "jobs": [
-        {"Lumberjack": 0},
-        {"Miner":  1}
-      ],
-      "knowledge_base": [
-        {"energy": 1000},
-        {"energy_threshold": 400},
-        {"hunger":  200},
-        {"hunger_threshold": 500},
-        {"rock_stock" :  0}
       ],
       "personality_traits": [
         {"Agreeableness": 0.25}
       ],
-      "relationships": [
-
-      ],
       "friendships": [
-        {"Agent1": 0},
-        {"Agent3": 10}
+        {"Ash": 2},
+        {"Billie": 4},
+        {"Bobbie": 2},
+
+        {"Casey": 4},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
       ],
       "loves": [
-        {"Agent1": 0},
-        {"Agent3": 0}
+        {"Ash": 0},
+        {"Billie": 0},
+        {"Bobbie": 0},
+
+        {"Casey": 0},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
+      ],
+      "bed": "Bed1"
+    },
+    {
+      "name": "Ash",
+      "jobs": [
+        {"Lumberjack": 0},
+        {"Miner":  1},
+        {"Patrolman":  0},
+        {"Gatherer":  0},
+        {"Fisherman":  0},
+        {"Farmer":  0}
+      ],
+      "knowledge_base": [
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.15}
+      ],
+      "friendships": [
+        {"Alex": 1},
+        {"Billie": 1},
+        {"Bobbie": 1},
+
+        {"Casey": 3},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
+      ],
+      "loves": [
+        {"Alex": 0},
+        {"Billie": 0},
+        {"Bobbie": 0},
+
+        {"Casey": 0},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
       ],
       "bed": "Bed2"
     },
     {
-      "name": "Agent3",
+      "name": "Billie",
       "jobs": [
         {"Lumberjack": 0},
-        {"Miner":  0}
+        {"Miner":  0},
+        {"Patrolman":  0},
+        {"Gatherer":  1},
+        {"Fisherman":  0},
+        {"Farmer":  0}
       ],
       "knowledge_base": [
-        {"energy": 1000},
-        {"energy_threshold": 400},
-        {"hunger":  200},
-        {"hunger_threshold": 500}
       ],
       "personality_traits": [
-        {"Agreeableness": 0.5}
-      ],
-      "relationships": [
-
+        {"Agreeableness": 0.35}
       ],
       "friendships": [
-        {"Agent2": 10},
-        {"Agent1": 5}
+        {"Ash": 4},
+        {"Alex": 5},
+        {"Bobbie": 3},
+
+        {"Casey": 0},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
       ],
       "loves": [
-        {"Agent2": 0},
-        {"Agent1": 0}
+        {"Ash": 0},
+        {"Alex": 0},
+        {"Bobbie": 0},
+
+        {"Casey": 0},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
       ],
       "bed": "Bed3"
+    },
+    {
+      "name": "Bobbie",
+      "jobs": [
+        {"Lumberjack": 0},
+        {"Miner":  0},
+        {"Patrolman":  0},
+        {"Gatherer":  0},
+        {"Fisherman":  1},
+        {"Farmer":  0}
+      ],
+      "knowledge_base": [
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.05}
+      ],
+      "friendships": [
+        {"Ash": 1},
+        {"Billie": 0},
+        {"Alex": 1},
+
+        {"Casey": 0},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
+      ],
+      "loves": [
+        {"Ash": 0},
+        {"Billie": 0},
+        {"Alex": 0},
+
+        {"Casey": 0},
+        {"Charlie": 0},
+        {"Fran": 0},
+        {"Jamie": 0}
+      ],
+      "bed": "Bed4"
+    },
+    {
+      "name": "Casey",
+      "jobs": [
+        {"Lumberjack": 1},
+        {"Miner":  0},
+        {"Patrolman":  0},
+        {"Gatherer":  0},
+        {"Fisherman":  0},
+        {"Farmer":  0}
+      ],
+      "knowledge_base": [
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.75}
+      ],
+      "friendships": [
+        {"Ash": 5},
+        {"Billie": 5},
+        {"Alex": 6},
+        {"Bobbie": 3},
+
+        {"Charlie": 8},
+        {"Fran": 10},
+        {"Jamie": 7}
+      ],
+      "loves": [
+        {"Ash": 0},
+        {"Billie": 0},
+        {"Alex": 0},
+        {"Bobbie": 0},
+
+        {"Charlie": 5},
+        {"Fran": 7},
+        {"Jamie": 5}
+      ],
+      "bed": "Bed5"
+    },
+    {
+      "name": "Charlie",
+      "jobs": [
+        {"Lumberjack": 0},
+        {"Miner":  1},
+        {"Patrolman":  0},
+        {"Gatherer":  0},
+        {"Fisherman":  0},
+        {"Farmer":  0}
+      ],
+      "knowledge_base": [
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.85}
+      ],
+      "friendships": [
+        {"Ash": 7},
+        {"Billie": 4},
+        {"Alex": 4},
+        {"Bobbie":  1},
+
+        {"Casey": 7},
+        {"Fran": 7},
+        {"Jamie": 8}
+      ],
+      "loves": [
+        {"Ash": 0},
+        {"Billie": 0},
+        {"Alex": 0},
+        {"Bobbie": 0},
+
+        {"Casey": 4},
+        {"Fran": 4},
+        {"Jamie": 4}
+      ],
+      "bed": "Bed6"
+    },
+    {
+      "name": "Fran",
+      "jobs": [
+        {"Lumberjack": 0},
+        {"Miner":  0},
+        {"Patrolman":  0},
+        {"Gatherer":  0},
+        {"Fisherman":  0},
+        {"Farmer":  1}
+      ],
+      "knowledge_base": [
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.95}
+      ],
+      "friendships": [
+        {"Ash": 5},
+        {"Billie": 5},
+        {"Alex": 5},
+        {"Bobbie":  3},
+
+        {"Casey": 9},
+        {"Charlie": 9},
+        {"Jamie": 9}
+      ],
+      "loves": [
+        {"Ash": 3},
+        {"Billie": 3},
+        {"Alex": 3},
+        {"Bobbie":  1},
+
+        {"Casey": 5},
+        {"Charlie": 5},
+        {"Jamie": 5}
+      ],
+      "bed": "Bed7"
+    },
+    {
+      "name": "Jamie",
+      "jobs": [
+        {"Lumberjack": 0},
+        {"Miner":  0},
+        {"Patrolman":  1},
+        {"Gatherer":  0},
+        {"Fisherman":  0},
+        {"Farmer":  0}
+      ],
+      "knowledge_base": [
+      ],
+      "personality_traits": [
+        {"Agreeableness": 0.65}
+      ],
+      "friendships": [
+        {"Ash": 2},
+        {"Billie": 2},
+        {"Alex": 2},
+        {"Bobbie":  0},
+
+        {"Casey": 7},
+        {"Charlie": 7},
+        {"Fran": 8}
+      ],
+      "loves": [
+        {"Ash": 0},
+        {"Billie": 0},
+        {"Alex": 0},
+        {"Bobbie":  0},
+
+        {"Casey": 1},
+        {"Charlie": 1},
+        {"Fran": 4}
+      ],
+      "bed": "Bed8"
     }
   ]
 }

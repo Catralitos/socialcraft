@@ -1,43 +1,155 @@
 {
   "houses": [
     {
-      "name": "House1",
+      "name": "HK_House1",
       "bounding_box": {
         "vertex1": [
-          -5,
-          0,
-          -5
+          -8,
+          79,
+          -35
         ],
         "vertex2": [
-          5,
-          0,
-          5
+          -1,
+          79,
+          -41
         ],
-        "height": 50
+        "height": 6
       },
       "beds": [
         {
           "name": "Bed1",
           "position": [
-            0,
-            4,
-            -2
+            -4,
+            79,
+            -40
           ]
-        },
+        }
+      ]
+    },
+    {
+      "name": "HK_House2",
+      "bounding_box": {
+        "vertex1": [
+          21,
+          65,
+          -14
+        ],
+        "vertex2": [
+          27,
+          65,
+          -20
+        ],
+        "height": 6
+      },
+      "beds": [
         {
           "name": "Bed2",
           "position": [
-            0,
-            4,
-            0
+            26,
+            65,
+            -17
           ]
-        },
+        }
+      ]
+    },
+    {
+      "name": "HK_House3",
+      "bounding_box": {
+        "vertex1": [
+          4,
+          69,
+          -22
+        ],
+        "vertex2": [
+          10,
+          69,
+          -28
+        ],
+        "height": 6
+      },
+      "beds": [
         {
           "name": "Bed3",
           "position": [
-            0,
-            4,
-            2
+            5,
+            69,
+            -25
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HK_House4",
+      "bounding_box": {
+        "vertex1": [
+          24,
+          64,
+          -35
+        ],
+        "vertex2": [
+          30,
+          64,
+          -41
+        ],
+        "height": 6
+      },
+      "beds": [
+        {
+          "name": "Bed4",
+          "position": [
+            25,
+            64,
+            -38
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A_House",
+      "bounding_box": {
+        "vertex1": [
+          -6,
+          72,
+          54
+        ],
+        "vertex2": [
+          5,
+          72,
+          34
+        ],
+        "height": 6
+      },
+      "beds": [
+        {
+          "name": "Bed5",
+          "position": [
+            -5,
+            72,
+            51
+          ]
+        },
+        {
+          "name": "Bed6",
+          "position": [
+            -5,
+            72,
+            47
+          ]
+        },
+        {
+          "name": "Bed7",
+          "position": [
+            -5,
+            72,
+            41
+          ]
+        },
+        {
+          "name": "Bed8",
+          "position": [
+            -5,
+            72,
+            36
           ]
         }
       ]
@@ -45,38 +157,159 @@
   ],
   "social_places": [
     {
-      "name": "World",
+      "name": "Canteen",
       "bounding_box": {
         "vertex1": [
-          -25,
-          0,
-          -25
+          12,
+          72,
+          55
+        ],
+        "vertex2": [
+          26,
+          72,
+          35
+        ],
+        "height": 6
+      },
+      "social_appropriateness": 1.2
+    },
+    {
+      "name": "Bar",
+      "bounding_box": {
+        "vertex1": [
+          10,
+          72,
+          28
         ],
         "vertex2": [
           25,
-          0,
-          25
+          72,
+          14
         ],
-        "height": 50
+        "height": 14
       },
-      "social_appropriateness": 1
-    },
+      "social_appropriateness": 1.5
+    }
+  ],
+  "work_places": [
     {
-      "name": "Plaza",
+      "name": "World",
       "bounding_box": {
         "vertex1": [
-          -15,
-          0,
-          -15
+          -256,
+          -256,
+          -256
         ],
         "vertex2": [
-          15,
-          0,
-          15
+          256,
+          -256,
+          256
+        ],
+        "height": 512
+      },
+        "can_dig_and_stack": "true"
+    },
+    {
+      "name": "Hunter_Keep",
+      "bounding_box": {
+        "vertex1": [
+          -10,
+          64,
+          -6
+        ],
+        "vertex2": [
+          31,
+          64,
+          -42
         ],
         "height": 50
       },
-      "social_appropriateness": 1.2
+      "can_dig_and_stack": "false"
+    },
+    {
+      "name": "Agraria",
+      "bounding_box": {
+        "vertex1": [
+          -10,
+          70,
+          61
+        ],
+        "vertex2": [
+          30,
+          70,
+          9
+        ],
+        "height": 17
+      },
+      "can_dig_and_stack": "false"
+    },
+    {
+      "name": "Forest",
+      "bounding_box": {
+        "vertex1": [
+          32,
+          63,
+          60
+        ],
+        "vertex2": [
+          65,
+          63,
+          4
+        ],
+        "height": 50
+      },
+      "can_dig_and_stack": "true"
+    },
+    {
+      "name": "Mine",
+      "bounding_box": {
+        "vertex1": [
+          33,
+          -256,
+          -20
+        ],
+        "vertex2": [
+          67,
+          -256,
+          -52
+        ],
+        "height": 400
+      },
+      "can_dig_and_stack": "true"
+    },
+    {
+      "name": "Farm",
+      "bounding_box": {
+        "vertex1": [
+          -8,
+          71,
+          24
+        ],
+        "vertex2": [
+          3,
+          71,
+          13
+        ],
+        "height": 400
+      },
+      "can_dig_and_stack": "false"
+    },
+    {
+      "name": "Wharf",
+      "bounding_box": {
+        "vertex1": [
+          -29,
+          70,
+          2
+        ],
+        "vertex2": [
+          -30,
+          70,
+          -1
+        ],
+        "height": 6
+      },
+      "can_dig_and_stack": "false"
     }
   ]
 }

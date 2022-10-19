@@ -68,10 +68,9 @@ class Agent {
     getMostSalientPractice(context, availablePractices) {
         let highestSalience = -1
         let mostSalientPractice = null
-        console.log("I have " + this._current_identities.length + " identities")
         for (let i = 0; i < availablePractices.length; i++) {
             let currentPractice = availablePractices[i]
-            let currentSalience = currentPractice.getSalience(context, this)
+            let currentSalience = currentPractice.getSalience(context)
             for (let j = 0; j < this._current_identities.length; j++) {
                 let multiplier = this._current_identities[j]._salienceRules[currentPractice._name]
                 if (multiplier !== null && multiplier !== undefined && !Number.isNaN(multiplier)){

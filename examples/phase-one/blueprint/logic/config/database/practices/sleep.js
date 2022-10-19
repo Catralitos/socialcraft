@@ -52,7 +52,7 @@ class Sleep extends Practice {
 
     getSalience(context) {
         let actualTicks = this._bot.time.timeOfDay
-        if (actualTicks >= 13000 && actualTicks <= 23000) {
+        if (actualTicks >= 13000 && actualTicks <= 23000 && !this._bot.isSleeping) {
             return Number.POSITIVE_INFINITY
         } else {
             return Number.NEGATIVE_INFINITY
@@ -65,14 +65,7 @@ class Sleep extends Practice {
 
     start() {
         super.start()
-        //this._bot.chat("I am going to sleep")
-        const mcData = require('minecraft-data')(this._bot.version)
-        const defaultMove = new Movements(this._bot, mcData)
-        defaultMove.canDig = false
-        defaultMove.allow1by1towers = false;
-        defaultMove.allowFreeMotion = true;
         let goal = new GoalNear(this._targetBedPosition.x, this._targetBedPosition.y, this._targetBedPosition.z, 1)
-        this._bot.pathfinder.setMovements(defaultMove)
         this._bot.pathfinder.setGoal(goal, true)
     }
 
@@ -87,7 +80,8 @@ class Sleep extends Practice {
     isPossible() {
         let actualTicks = this._bot.time.timeOfDay
         return !this._bot.isSleeping && ((actualTicks >= 13000 && actualTicks < 23000) || this._bot.thunderState > 0) &&
-            this._targetBedPosition !== null && this._targetBedPosition !== undefined;
+            this._targetBedPosition !== null && this._targetBedPosition !== undefined && this._targetBedPosition
+            //&& this._bot.isABed(this._bot.blockAt(this._targetBedPosition));
     }
 
     hasEnded() {

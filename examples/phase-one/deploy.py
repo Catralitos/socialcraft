@@ -1,15 +1,15 @@
 import json
-from javascript import require
-from collections import ChainMap
-from socialcraft import AgentManager
-import pathlib
 import os
+import pathlib
+from collections import ChainMap
+
+from socialcraft import AgentManager
 
 if __name__ == "__main__":
 
     print("Starting Agent Manager...")
     manager = AgentManager(
-        minecraft_host="host.docker.internal",
+        minecraft_host="94.62.236.32",
         minecraft_port=25565,
         minecraft_version="1.12",
     )
@@ -30,26 +30,49 @@ if __name__ == "__main__":
     print("Killed all dangling agents!")
 
     print("Reading locations")
-    # read beds from JSON (ignoring for now, cause I have no world)
-    # read workplaces from JSON (ignoring for now, cause I have no world)
     f = open("blueprint/logic/config/scenarios/phase-1/Locations.json")
     data = json.load(f)
 
     houses = []
     socialPlaces = []
+    workPlaces = []
     for house in data["houses"]:
         name = house["name"]
         bounding_box = house["bounding_box"]
-        beds = dict(ChainMap(*house["beds"]))
-        #houses.append({name, bounding_box, beds})
-        houses.append(house)
+        beds = []
+        for bed in house["beds"]:
+            beds.append(bed)
+        aux = {
+            "name": name,
+            "bounding_box": bounding_box,
+            "beds": beds
+        }
+        print(aux)
+        houses.append(aux)
 
     for socialPlace in data["social_places"]:
         name = socialPlace["name"]
         bounding_box = socialPlace["bounding_box"]
         social_appropriateness = socialPlace["social_appropriateness"]
-        #socialPlaces.append({name, bounding_box, social_appropriateness})
-        socialPlaces.append(socialPlace)
+        aux = {
+            "name": name,
+            "bounding_box": bounding_box,
+            "social_appropriateness": social_appropriateness
+        }
+        print(aux)
+        socialPlaces.append(aux)
+
+    for workPlace in data["work_places"]:
+        name = workPlace["name"]
+        bounding_box = workPlace["bounding_box"]
+        can_dig_and_stack = workPlace["can_dig_and_stack"]
+        aux = {
+            "name": name,
+            "bounding_box": bounding_box,
+            "can_dig_and_stack": can_dig_and_stack
+        }
+        print(aux)
+        workPlaces.append(aux)
 
     print("Deploying agents...")
     f = open("blueprint/logic/config/scenarios/phase-1/Agents.json")
@@ -62,7 +85,7 @@ if __name__ == "__main__":
         job_infos = dict(ChainMap(*agent["jobs"]))
         kb = dict(ChainMap(*agent["knowledge_base"]))
         pt = dict(ChainMap(*agent["personality_traits"]))
-        r = dict(ChainMap(*agent["relationships"]))
+        #r = dict(ChainMap(*agent["relationships"]))
         f = dict(ChainMap(*agent["friendships"]))
         lo = dict(ChainMap(*agent["loves"]))
         bed = agent["bed"]
@@ -71,11 +94,11 @@ if __name__ == "__main__":
             "jobs": job_infos,
             "knowledge_base": kb,
             "personality_traits": pt,
-            "relationships": r,
             "friendships": f,
             "loves": lo,
             "houses": houses,
             "social_places": socialPlaces,
+            "work_places": workPlaces,
             "bed": bed
         })
         aux.deploy()

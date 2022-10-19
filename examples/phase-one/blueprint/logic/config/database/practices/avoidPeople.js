@@ -1,5 +1,4 @@
 const pathfinder = require('mineflayer-pathfinder').pathfinder
-const Movements = require('mineflayer-pathfinder').Movements
 const {GoalNear} = require('mineflayer-pathfinder').goals
 const Practice = require("../../../practice.js")
 const {Vec3} = require("vec3");
@@ -14,15 +13,15 @@ class AvoidPeople extends Practice {
     }
 
     getSalience(context) {
-        //O Job vai ser a saliência basicamente.
-        // Enquanto ele trabalha, ele corta madeira, a não ser que algo seja mais importante
-        return 0.25;
+        return (1 - this._agent._personality_traits["Agreeableness"]) * context._listOfSurroundingPeople.length;
     }
 
     setup(context) {
         let botPosition = this._bot.entity.position
         let nearestTargetPosition = this._bot.nearestEntity((entity => entity.type === "player").position)
-        this._targetPosition = (nearestTargetPosition.subtract(botPosition).normalized.multiply(new Vec3(5, 0, 5)).add(botPosition))
+        let vector = new Vec3(nearestTargetPosition.x, nearestTargetPosition.y, nearestTargetPosition.z)
+        this._targetPosition = (vector.subtract(botPosition).normalize().dot(new Vec3(5, 0, 5)))
+        this._targetPosition.add(botPosition)
     }
 
     start() {

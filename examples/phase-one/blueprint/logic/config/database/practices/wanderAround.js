@@ -1,5 +1,4 @@
 const pathfinder = require('mineflayer-pathfinder').pathfinder
-const Movements = require('mineflayer-pathfinder').Movements
 const {GoalNear} = require('mineflayer-pathfinder').goals
 const Practice = require("../../../practice.js")
 const {Vec3} = require("vec3");
@@ -15,8 +14,7 @@ class WanderAround extends Practice {
     }
 
     getSalience(context) {
-        return 0.35
-        //return 10
+        return (1 - this._agent._personality_traits["Agreeableness"]) + 0.5
     }
 
     setup(context) {

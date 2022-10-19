@@ -1,91 +1,72 @@
 const pathfinder = require('mineflayer-pathfinder').pathfinder
-const Movements = require('mineflayer-pathfinder').Movements
-//const mcData = require('minecraft-data')
 const collectBlock = require('mineflayer-collectblock');
-const {GoalNear} = require('mineflayer-pathfinder').goals
-const Vec3 = require('vec3').Vec3;
-const Practice = require("../../../practice.js");
+const Practice = require("../../../practice.js")
+
+const woodIds = [17, 162]
 
 class ChopWood extends Practice {
 
-    _targetWoodBlockPos;
     _targetWoodBlock;
-    _begunDigging;
     _finishedDigging;
 
     constructor(bot, agent, timeout = 20) {
         super(bot, "ChopWood", agent, timeout);
-        this._targetWoodBlockPos = null
         this._targetWoodBlock = null;
-        this._begunDigging = false;
+        this._centralPoint = null;
         this._finishedDigging = false;
     }
 
     getSalience(context) {
-        //O Job vai ser a saliência basicamente.
-        // Enquanto ele trabalha, ele corta madeira, a não ser que algo seja mais importante
-        return this._agent._current_job._name === "Lumberjack" && this._agent._current_job.onTheJob(this._agent._bot.time.timeOfDay) ? 1 : -5;
+        return this._agent._current_job._name === "Lumberjack"
+        && this._agent._current_job.onTheJob(this._agent._bot.time.timeOfDay) &&
+        this._agent._current_job._location === context._location ? 2 : Number.NEGATIVE_INFINITY;
     }
 
     setup(context) {
-        //block.type 17 means wood. For specific kinds of wood, use metadata too
+        this._centralPoint = this._agent._current_job._location.getCentralPoint()
+        let radius = this._agent._current_job._location.getRadius()
         let blocks = this._bot.findBlocks({
-                point: this._bot.entity.position,
+                point:  this._centralPoint,
                 matching: block => {
-                    return block.type === 17;
+                    return block.name.endsWith("_wood") || woodIds.includes(block.type)
                 },
-                maxDistance: 256,
+                maxDistance: radius,
                 count: 50
             }
         )
-        console.log("Found " + blocks.length + " wood blocks")
-        if (blocks.length > 0)
-            this._targetWoodBlockPos = blocks[0]
+        if (blocks.length > 0) {
+            let index = Number.parseInt(this._agent._bed[3]) >= 5 ? 0 : Math.floor(Math.random() * blocks.length)
+            this._targetWoodBlock = this._bot.blockAt(blocks[index])
+        }
     }
 
     start() {
         super.start()
-        this._bot.chat("I am going to chop wood")
-        begin().then(r => {});
-        /*let bestTool = this._bot.pathfinder.bestHarvestTool(this._targetWoodBlock)
+        let bestTool = this._bot.pathfinder.bestHarvestTool(this._targetWoodBlock)
         if (bestTool !== null) {
             this._bot.equip(bestTool, "hand").then(() => "Equipped " + bestTool.displayName);
         }
-        const mcData = require('minecraft-data')(this._bot.version)
-        const defaultMove = new Movements(this._bot, mcData)
-        defaultMove.canDig = true // Enable breaking of blocks when pathing
-        let goal = new GoalNear(this._targetWoodBlockPos.x, this._targetWoodBlockPos.y, this._targetWoodBlockPos.z, 3)
-        this._bot.pathfinder.setMovements(defaultMove)
-        this._bot.pathfinder.setGoal(goal)*/
-
-        async function begin() {
-            try {
-                await this._bot.collectBlock.collect(this._targetWoodBlock)
-            } catch (err) {
-                console.log(err) // Handle errors, if any
-            }
-        }
-
+        this.getBlock()
     }
 
-    update() {
-        console.log("Bot position " + this._bot.entity.position)
-        console.log("Block position " + this._targetWoodBlockPos)
-        if (this._bot.canDigBlock(this._targetWoodBlock) && !this._begunDigging) {
-            console.log("In range of wood block")
-            this._begunDigging = true;
-            this._bot.dig(this._targetWoodBlock).then(r => {
-                console.log("Finished digging wood block")
-                this._finishedDigging = true
-            })
+    getBlock() {
+        begin(this._targetWoodBlock, this._bot).then(r => {
+            this._finishedDigging = true
+        })
+
+        async function begin(targetWoodBlock, bot) {
+            if (targetWoodBlock) {
+                try {
+                    await bot.collectBlock.collect(targetWoodBlock)
+                } catch (err) {
+                    console.log(err) // Handle errors, if any
+                }
+            }
         }
     }
 
     isPossible() {
-        if (this._targetWoodBlockPos === null || this._targetWoodBlockPos === undefined) return false;
-        this._targetWoodBlock = this._bot.blockAt(this._targetWoodBlockPos);
-        //return this._bot.canDigBlock(this._targetWoodBlock)
-        return true;
+        return this._targetWoodBlock
     }
 
     hasEnded() {
@@ -94,12 +75,10 @@ class ChopWood extends Practice {
 
     exit() {
         super.exit()
-        this.agent.incrementItemInKnowledgeBase("wood_stock")
-        this._targetWoodBlockPos = null;
+        this._agent.incrementItemInKnowledgeBase("wood_stock")
         this._targetWoodBlock = null;
-        this._begunDigging = false;
         this._finishedDigging = false;
-        this._bot.pathfinder.setGoal(null);
+        //this._bot.pathfinder.setGoal(null);
     }
 }
 

@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  minecraft-server:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft-server
+    ports:
+      - 25565:25565
+    environment:
+      SERVER_NAME: "Socialcraft-Minecraft-Server"
+      EULA: "TRUE"
+      VERSION: "1.12"
+      MODE: "survival"
+      ONLINE_MODE: "false"
+      OPS: "${OPS_PLAYERS}"
+      MAX_PLAYERS: 9
+      SPAWN_ANIMALS: "true"
+      SPAWN_MONSTERS: "false"
+      SPAWN_NPCS: "false"
+      PVP: "false"
+      GENERATE_STRUCTURES: "false"
+      MAX_WORLD_SIZE: 100
+      OVERRIDE_SERVER_PROPERTIES: "true"
+      SPAWN_PROTECTION: "0"
+      WORLD: /worlds/test-world.zip
+      #RCON_CMDS_ON_CONNECT: |-
+      #  /give @a baked_potato 64
+    
+    restart: "no"
+    user: "${UID}:${GID}"
+    volumes:
+      - ./worlds:/worlds:ro
+      - ./data:/data
+    logging:
+      driver: "local"
+      options:
+        max-size: "1m"

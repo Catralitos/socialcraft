@@ -1,8 +1,9 @@
 class Job{
 
-    constructor(affinity, name, timeBlocks) {
+    constructor(affinity, name, timeBlocks, location) {
         this._affinity = affinity;
         this._name = name;
+        this._location = location
         this._timeBlocks = timeBlocks;
     }
 

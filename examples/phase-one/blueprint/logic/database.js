@@ -2,21 +2,40 @@ const {Vec3} = require("vec3");
 
 const House = require("./house.js")
 const SocialPlace = require("./socialPlace.js")
+const WorkPlace = require("./workPlace.js")
 
 //Importing all the practices
 const {AvoidPeople} = require('./config/database/practices/avoidPeople.js')
 const {ChopWood} = require('./config/database/practices/chopWood.js')
-const {MineRock} = require('./config/database/practices/mineRock.js')
 const {Eat} = require('./config/database/practices/eat.js')
-const {GoToHouse} = require('./config/database/practices/goToHouse.js')
+const {EatSocial} = require('./config/database/practices/eatSocial.js')
+const {Fish} = require('./config/database/practices/fish.js')
+const {GatherPlants} = require('./config/database/practices/gatherPlants.js')
+const {GoToBar} = require("./config/database/practices/goToBar");
+const {GoToWork} = require('./config/database/practices/goToWork.js')
+const {HarvestCrops} = require('./config/database/practices/harvestCrops.js')
+const {MineOre} = require('./config/database/practices/mineOre.js')
 const {Sleep} = require('./config/database/practices/sleep.js')
+const {Patrol} = require('./config/database/practices/patrol.js')
+const {PlantCrops} = require('./config/database/practices/plantCrops.js')
 const {WanderAround} = require('./config/database/practices/wanderAround.js')
-const {Greet} = require('./config/database/socialPractices/greet.js')
+
+const {Compliment} = require('./config/database/socialPractices/compliment.js')
 const {Goodbye} = require('./config/database/socialPractices/goodbye.js')
+const {Greet} = require('./config/database/socialPractices/greet.js')
+const {Insult} = require('./config/database/socialPractices/insult.js')
+const {ProfessLove} = require('./config/database/socialPractices/professLove.js')
+const {WeatherTalk} = require('./config/database/socialPractices/weatherTalk.js')
+
+//importing the jobs related files
 const JOB_DEFINITIONS = require("./config/database/jobDefinitions");
 const {Job} = require("./job");
 const TimeBlock = require("./timeBlock");
-const {Boss} = require("./config/database/identities/boss");
+
+//importing the identities
+const {Enemy} = require("./config/database/identities/enemy");
+const {Friend} = require("./config/database/identities/friend");
+const {Working} = require("./config/database/identities/working");
 
 class Database {
 
@@ -28,6 +47,7 @@ class Database {
     _identities;
     _houses;
     _socialPlaces;
+    _workPlaces;
     _combinedLocations;
 
     constructor(bot, handler, agent) {
@@ -38,6 +58,7 @@ class Database {
         this._practices = [];
         this._houses = [];
         this._socialPlaces = []
+        this._workPlaces = []
         this._identities = []
     }
 
@@ -50,7 +71,7 @@ class Database {
                 new Vec3(h.bounding_box.vertex2[0], h.bounding_box.vertex2[1], h.bounding_box.vertex2[2]), h.bounding_box.height, h.beds))
         }
         houseAux.sort(function (a, b) {
-            return a.getVolume() - b.getVolume();
+            return a.getArea() - b.getArea();
         })
         this._houses = houseAux
         let bed = this.getBed(this.agent._bed)
@@ -66,29 +87,57 @@ class Database {
                 new Vec3(s.bounding_box.vertex2[0], s.bounding_box.vertex2[1], s.bounding_box.vertex2[2]), s.bounding_box.height, s.social_appropriateness))
         }
         socialAux.sort(function (a, b) {
-            return a.getVolume() - b.getVolume();
+            return a.getArea() - b.getArea();
         })
         this._socialPlaces = socialAux
     }
 
+    addWorkPlaces() {
+        let workPlaceData = this.handler.get_init_env_variable("work_places")
+        let workAux = []
+        for (let i = 0; i < workPlaceData.length; i++) {
+            let s = workPlaceData[i]
+            workAux.push(new WorkPlace(s.name, new Vec3(s.bounding_box.vertex1[0], s.bounding_box.vertex1[1], s.bounding_box.vertex1[2]),
+                new Vec3(s.bounding_box.vertex2[0], s.bounding_box.vertex2[1], s.bounding_box.vertex2[2]), s.bounding_box.height, s.can_dig_and_stack === "true"))
+        }
+        workAux.sort(function (a, b) {
+            return a.getArea() - b.getArea();
+        })
+        this._workPlaces = workAux
+    }
+
     mergeLocationsList() {
         let auxList = this._houses.concat(this._socialPlaces)
+        auxList = auxList.concat(this._workPlaces)
         auxList.sort(function (a, b) {
-            return a.getVolume() - b.getVolume();
+            return a.getArea() - b.getArea();
         })
         this._combinedLocations = auxList
     }
 
     addPractices() {
-        this._practices.push(new AvoidPeople(this.bot, this.agent))
+        //this._practices.push(new AvoidPeople(this.bot, this.agent))
         this._practices.push(new ChopWood(this.bot, this.agent));
         this._practices.push(new Eat(this.bot, this.agent));
-        this._practices.push(new GoToHouse(this.bot, this.agent))
-        this._practices.push(new MineRock(this.bot, this.agent));
+        this._practices.push(new EatSocial(this.bot, this.agent));
+        this._practices.push(new Fish(this.bot, this.agent));
+        this._practices.push(new GatherPlants(this.bot, this.agent));
+        this._practices.push(new GoToWork(this.bot, this.agent));
+        this._practices.push(new GoToBar(this.bot, this.agent));
+        this._practices.push(new HarvestCrops(this.bot, this.agent));
+        this._practices.push(new MineOre(this.bot, this.agent));
+        this._practices.push(new Patrol(this.bot, this.agent));
+        //this._practices.push(new PlantCrops(this.bot, this.agent));
         this._practices.push(new Sleep(this.bot, this.agent));
         this._practices.push(new WanderAround(this.bot, this.agent))
-        this._practices.push(new Greet(this.bot, this.agent))
+
+        this._practices.push(new Compliment(this.bot, this.agent));
         this._practices.push(new Goodbye(this.bot, this.agent))
+        this._practices.push(new Greet(this.bot, this.agent))
+        this._practices.push(new Insult(this.bot, this.agent));
+        this._practices.push(new ProfessLove(this.bot, this.agent));
+        this._practices.push(new WeatherTalk(this.bot, this.agent));
+
     }
 
     addJobs() {
@@ -108,13 +157,15 @@ class Database {
                 }
                 timeBlocks.push(new TimeBlock(blockInfo.StartTime, blockInfo.EndTime, practices))
             }
-            agent_jobs.push(new Job(this.handler.get_init_env_variable("jobs")[job.Name], job.Name, timeBlocks));
+            agent_jobs.push(new Job(this.handler.get_init_env_variable("jobs")[job.Name], job.Name, timeBlocks, this.getLocationByName(job.Location)));
         }
         this._jobs = agent_jobs
     }
 
-    addIdentities(){
-        this._identities.push(new Boss(this.bot))
+    addIdentities() {
+        this._identities.push(new Enemy(this.bot))
+        this._identities.push(new Friend(this.bot))
+        this._identities.push(new Working(this.bot))
     }
 
     getPracticeByName(practiceName) {
@@ -130,26 +181,26 @@ class Database {
         return this._practices.map((x) => x).sort(() => Math.random() - 0.5);
     }
 
+    getShuffledJobs() {
+        return this._jobs.map((x) => x).sort(() => Math.random() - 0.5);
+    }
+
     getAvailablePractices() {
         let currentTime = this.bot.time.timeOfDay
         if (this.agent._current_job != null && this.agent._current_job.onTheJob(currentTime)) {
             return this.agent._current_job.getAvailablePractices(currentTime)
         } else {
             return this.getShuffledPractices()
-            //.filter(practice => {
-            /*if (practice instanceof SocialPractice) {
-                if (!this.agent._socializing) {
-                    return practice._startsSocial;
-                } else {
-                    if (practice._startsSocial) {
-                        return false;
-                    }
-                }
-            } else {
-                return true;
-            }*/
-            //})
         }
+    }
+
+    getLocationByName(name) {
+        for (let i = 0; i < this._combinedLocations.length; i++) {
+            if (this._combinedLocations[i]._name === name) {
+                return this._combinedLocations[i]
+            }
+        }
+        return null;
     }
 
     getBotLocation(bot = this.bot) {
@@ -176,7 +227,7 @@ class Database {
         return listOfBots
     }
 
-    getBotByUsername(username){
+    getBotByUsername(username) {
         let players = Object.values(this.bot.players);
         for (let i = 0; i < players.length; i++) {
             let botAux = players[i]
