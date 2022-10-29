@@ -102,19 +102,6 @@ class SocialcraftHandler {
         }
         return string.includes(':') || string.includes('{') || string.includes('}') ? JSON.parse(string.replace(/'/g, "\"")) : string
     }
-
-    isJson(str) {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-    }
-
-    hasSpawned() {
-        return this.spawned;
-    }
 }
 
 module.exports = SocialcraftHandler;
