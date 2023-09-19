@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     print("Starting Agent Manager...")
     manager = AgentManager(
-        minecraft_host="94.62.236.32",
+        minecraft_host="localhost",
         minecraft_port=25565,
         minecraft_version="1.12",
     )

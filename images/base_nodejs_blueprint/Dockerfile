@@ -1,4 +1,4 @@
-from nikolaik/python-nodejs:python3.10-nodejs16-alpine
+FROM nikolaik/python-nodejs:python3.11-nodejs20-alpine	
 LABEL socialcraft_agent=''
 
 # Add Mineflayer modules

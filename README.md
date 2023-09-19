@@ -4,34 +4,41 @@
 
 To use the socialcraft library, the user needs to have a Docker-Engine (local or remote) and a Minecraft server (local or remote).
 
-### Create an Agent Manager
-```
-agent_manager = AgentManager(docker_url="...", minecraft_server_url="...")
+I won't be getting too technical into aspects related to the mechanics/specifics of Minecraft and setting up a server for it.
+
+### Prepare the Python and Node environment
+
+Run the following commands to install all dependencies:
+
+```console
+pip install -r requirements.txt
+npm install
 ```
 
-### Create an agent template
-```
-agent_blueprint = manager.create_blueprint(source_path)
+### Build the dockerfile
+
+Make sure the Docker daemon is running.
+
+Open a cmd on the root of the project and run the command:
+```console
+docker build -t javascript_blueprint .\images\base_nodejs_blueprint\
 ```
 
-### Create an agent instance based on a template
-```
-agent = agent_manager.create_agent("Maria1", agent_blueprint)
+### Run the server
+
+There is a docker-compose.yml file that has all the settings that make up the server. The version of Minecraft, the map it runs, the maximum number of players, if it spawns animals, npcs, and enemies, etc... which is fully customizable. You can find more information about it [here](https://containers.fan/posts/setup-minecraft-server-on-docker/). By default this uses a test map in the worlds folder and Minecraft version 1.12.
+
+Firstly, you will neeed to create a .env file by running the following commands:
+
+```console
+echo UID=$(id -u) > .env
+echo GID=$(id -g) >> .env
 ```
 
-### Deploy the agent into the Minecraft Server
-```
-agent.deploy() 
-```
-or 
-```
-agent_manager.deploy_agent(agent.name)
-```
+Then open the file and add also WHITELISTED_PLAYERS and OPS_PLAYERS variables to it, even if you plan to leave them blank.
 
-## Deploy Minecraft Server
+After the server is deployed, you can connect to it by connecting directly to localhost:25565.
 
-### Using docker
+### Deploying the agents
 
-```
-docker run -d -p 25565:25565 -e MODE=creative -e MAX_WORLD_SIZE=1 -e GENERATE_STRUCTURES=false -e SPAWN_ANIMALS=false -e SPAWN_MONSTERS=false -e SPAWN_NPCS=false -e LEVEL_TYPE=flat -e EULA=TRUE -e ONLINE_MODE=FALSE -e MAX_PLAYERS=50 -e VERSION=1.17 --name mc itzg/minecraft-server
-```
+Run deploy.py and the agents will deploy.
