@@ -10,7 +10,7 @@ In order to test our framework, we created two villages of agents in Minecraft, 
 
 Results were mixed, but promising, with agents doing great in many of the parameters set for believability, but having a lot of technical problems.
 
-Full details as to how the code works and can be found in the [thesis document]("SocialAgentsInMinecraft.pdf").
+Full details as to how the code works and can be found in the [thesis document](SocialAgentsInMinecraft.pdf).
 
 ## Usage
 
